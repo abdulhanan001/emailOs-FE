@@ -18,6 +18,7 @@ import {
   FormHelperText,
 } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
+import axios from 'axios';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -30,13 +31,21 @@ const schema = yup.object().shape({
 });
 
 const Form = () => {
-  const { handleSubmit, control, formState: { errors } } = useForm({
+  const { handleSubmit, control, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
     mode: 'all',
   });
 
-  const onSubmit = (data) => {
-    console.log('Form data submitted:', data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/users', data);
+      reset()
+      // Handle successful response if needed
+    } catch (error) {
+      reset()
+      console.error('Failed to submit user data:', error);
+      // Handle failed response if needed
+    }
   };
 
   return (
