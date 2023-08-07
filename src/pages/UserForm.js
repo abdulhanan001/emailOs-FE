@@ -17,7 +17,7 @@ import {
   Box,
 } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
-import axios from 'axios';
+import api from '../api'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -29,7 +29,7 @@ const schema = yup.object().shape({
   gender: yup.string().oneOf(['male', 'female']).required(),
   about: yup.string().required(),
   dob: yup.date().required(),
-  education: yup.string().oneOf(['BS', 'MS', 'PHD']).required(),
+  education: yup.string().oneOf(['becahlurar', 'MS', 'PHD']).required(),
 });
 
 const Form = () => {
@@ -41,10 +41,12 @@ const Form = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/users', data);
+      const response = await api.post('/users', data);
       if (response.status === 200) {
         reset()
+        toast('User Registered Successfully', { type: 'success' });
         return navigate('/users');
+        
       }
     } catch (error) {
       toast(error.response.data.message, { type: 'error' });
@@ -161,7 +163,7 @@ const Form = () => {
               <FormControl error={!!errors.education}>
                 <InputLabel>Education</InputLabel>
                 <Select {...field} label="Education">
-                  <MenuItem value="BS">BS</MenuItem>
+                  <MenuItem value="becahlurar">BS</MenuItem>
                   <MenuItem value="MS">MS</MenuItem>
                   <MenuItem value="PHD">PHD</MenuItem>
                 </Select>

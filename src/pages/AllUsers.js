@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Grid } from '@mui/material';
-import UserCard from './UserCard';
-import axios from 'axios';
+import UserCard from '../components/UserCard';
+import api from '../api'
 
 const AllUsers = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]); // TODO: we should use RTK or redux
 
   useEffect(() => {
-    // Fetch user data from the API
-    axios
-      .get('http://localhost:5000/api/users')
+    api.get('/users')
       .then((response) => {
-        setUsers(response.data);
+        setUsers(response.data); 
       })
       .catch((error) => {
         console.error('Error fetching users:', error);
       });
-  }, []); // Empty dependency array to execute the effect only once
+  }, []);
 
   return (
     <Box sx={{ textAlign: 'center' }}>

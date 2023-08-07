@@ -1,6 +1,6 @@
 import React from 'react';
-import UserForm from './components/UserForm';
-import Users from './components/AllUsers';
+import UserForm from './pages/UserForm';
+import Users from './pages/AllUsers';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
