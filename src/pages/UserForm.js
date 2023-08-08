@@ -133,11 +133,9 @@ const Form = () => {
                 placeholder="Write something about yourself"
                 style={{ width: '100%' }}
                 {...field}
-                error={Boolean(errors.about)}
               />
             )}
           />
-          {errors.about && <FormHelperText>{errors.about.message}</FormHelperText>}
 
           <InputLabel>Date of Birth</InputLabel>
           <Controller
