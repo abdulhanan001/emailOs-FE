@@ -61,7 +61,7 @@ const Form = () => {
           <InputLabel>Email</InputLabel>
           <Controller
             name="email"
-            control={control}npm i react-toastify
+            control={control}
             defaultValue=""
             render={({ field }) => (
               <TextField
