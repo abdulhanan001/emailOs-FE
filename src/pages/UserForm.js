@@ -46,10 +46,18 @@ const Form = () => {
         reset()
         toast('User Registered Successfully', { type: 'success' });
         return navigate('/users');
-        
+
       }
     } catch (error) {
-      toast(error.response.data.message, { type: 'error' });
+      const errors = error.response.data.errors;
+
+      if (Array.isArray(errors)) {
+        errors.map((errorMessage, index) => (
+          toast.error(errorMessage, { key: index.toString() })
+        ));
+      } else if (typeof errors === 'string') {
+        toast.error(errors);
+      }
     }
   };
 
